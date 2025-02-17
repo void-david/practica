@@ -1,5 +1,9 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
+const session = require('express-session');
+const passport = require('passport');
+require('./passport'); // Ensure passport configuration is loaded
+const authRoutes = require('./authRoutes');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,6 +16,11 @@ const db = new sqlite3.Database('./products.db', (err) => {
 });
 
 app.use(express.json());
+app.use(session({ secret: '', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/', authRoutes);
 
 // GET all products
 app.get('/products', (req, res) => {
