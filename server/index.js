@@ -16,7 +16,7 @@ const db = new sqlite3.Database('./products.db', (err) => {
 });
 
 app.use(express.json());
-app.use(session({ secret: '', resave: false, saveUninitialized: false }));
+app.use(session({ secret: 'mysecret', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
