@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class DashboardComponent implements OnInit {
   user: any = {};
+  waifu: any = {};
   searchName: string = '';
   errorMessage: string = '';
 
@@ -33,6 +34,20 @@ export class DashboardComponent implements OnInit {
       },
       (error) => {
         this.errorMessage = 'Pokémon not found. Please try again.';
+        this.user = {};
+      }
+    );
+  }
+
+  getWaifu(){
+  
+    this.http.get(`https://api.waifu.pics/sfw/waifu`).subscribe(
+      (result: any) => {
+        this.waifu = result;
+        this.errorMessage = '';
+      },
+      (error) => {
+        this.errorMessage = 'waifu not found. Please try again.';
         this.user = {};
       }
     );
