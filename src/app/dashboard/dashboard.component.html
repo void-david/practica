@@ -5,18 +5,17 @@
   </div>
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   <div *ngIf="user.forms" class="card">
-    <h3>{{ user.forms[0].name }}</h3>
+    <h3>{{ user.species.name }}</h3>
     <img *ngIf="user.sprites" [src]="user.sprites.front_default" alt="{{ user.forms[0].name }}" />
-    <p><strong>Height:</strong> {{ user.height }} decimetres</p>
-    <p><strong>Weight:</strong> {{ user.weight }} hectograms</p>
-    <p><strong>Category:</strong> {{ user.species.name }}</p>
+    <img *ngIf="user.sprites" [src]="user.sprites.back_default" alt="{{ user.forms[0].name }}" />
+    <p><strong>Height:</strong> {{ user.height *10}} centimeters</p>
+    <p><strong>Weight:</strong> {{ user.weight/10 }} kilograms</p>
     <p><strong>Types:</strong></p>
     <ul>
       <li *ngFor="let type of user.types">
         {{ type.type.name }}
       </li>
     </ul>
-    <p><strong>Base Experience:</strong> {{ user.base_experience }}</p>
     <p><strong>Abilities:</strong></p>
     <ul>
       <li *ngFor="let ability of user.abilities">
