@@ -30,3 +30,24 @@
     <hr>
   </div>
 </div>
+
+<div class="container">
+  <div class="search-bar">
+    <input [(ngModel)]="searchType" placeholder="Enter Pokémon type" (keyup.enter)="getType()" />
+    <button (click)="getType()">Search</button>
+  </div>
+
+  <div *ngIf="errorMessageType" class="error-message">{{ errorMessageType }}</div>
+  <div *ngIf="type.pokemon" class="card">
+    <h3>{{ type.name }}</h3>
+    <p><strong>Height:</strong> {{ user.height *10}} centimeters</p>
+    <p><strong>Weight:</strong> {{ user.weight/10 }} kilograms</p>
+    <p><strong>Types:</strong></p>
+    <ul>
+      <li *ngFor="let pokemon of type.pokemon">
+        {{ pokemon.pokemon.name }}
+      </li>
+    </ul>
+  </div>
+
+</div>

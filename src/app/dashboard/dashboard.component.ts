@@ -13,8 +13,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class DashboardComponent implements OnInit {
   user: any = {};
+  type: any = {};
+  searchType: string = '';
   searchName: string = '';
   errorMessage: string = '';
+  errorMessageType: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +37,24 @@ export class DashboardComponent implements OnInit {
       (error) => {
         this.errorMessage = 'Pokémon not found. Please try again.';
         this.user = {};
+      }
+    );
+  }
+
+  getType(){
+    if(!this.searchType){
+      this.errorMessageType = 'Please enter a type name.';
+      return;
+    }
+
+    this.http.get(`https://pokeapi.co/api/v2/type/${this.searchType.toLowerCase()}`).subscribe(
+      (result: any) => {
+        this.type = result;
+        this.errorMessageType = '';
+      },
+      (error) => {
+        this.errorMessageType = 'Type not found. Please try again.';
+        this.type = {};
       }
     );
   }
