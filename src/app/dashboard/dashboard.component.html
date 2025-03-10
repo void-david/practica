@@ -1,9 +1,15 @@
 <div class="container">
-  
+
   <div class="search-bar">
     <input [(ngModel)]="searchType" placeholder="Enter Pokémon type" (keyup.enter)="getType()" />
     <button (click)="getType()">Search Type</button>
   </div>
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= pokemonDetails.length">Next</button>
+  </div>
+
+  <br>
   <div *ngIf="errorMessageType" class="error-message">{{ errorMessageType }}</div>
   <div *ngIf="type.name" class="cards-container">
     <div *ngFor="let pokemon of paginatedPokemonDetails" class="card">
