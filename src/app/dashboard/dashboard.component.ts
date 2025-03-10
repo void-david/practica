@@ -18,6 +18,9 @@ export class DashboardComponent implements OnInit {
   searchName: string = '';
   errorMessage: string = '';
   errorMessageType: string = '';
+  pokemonDetails: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 2;
 
   constructor(private http: HttpClient) {}
 
@@ -41,8 +44,8 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  getType(){
-    if(!this.searchType){
+  getType() {
+    if (!this.searchType) {
       this.errorMessageType = 'Please enter a type name.';
       return;
     }
@@ -51,11 +54,37 @@ export class DashboardComponent implements OnInit {
       (result: any) => {
         this.type = result;
         this.errorMessageType = '';
+        this.pokemonDetails = [];
+        this.type.pokemon.forEach((pokemonEntry: any) => {
+          this.http.get(pokemonEntry.pokemon.url).subscribe(
+            (pokemonResult: any) => {
+              this.pokemonDetails.push(pokemonResult);
+            }
+          );
+        });
       },
       (error) => {
         this.errorMessageType = 'Type not found. Please try again.';
         this.type = {};
       }
     );
+  }
+
+  get paginatedPokemonDetails() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.pokemonDetails.slice(startIndex, endIndex);
+  }
+
+  nextPage() {
+    if (this.currentPage * this.itemsPerPage < this.pokemonDetails.length) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
   }
 }
