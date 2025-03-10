@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   errorMessageType: string = '';
   pokemonDetails: any[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 5;
 
   constructor(private http: HttpClient) {}
 
