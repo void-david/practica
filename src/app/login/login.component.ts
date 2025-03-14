@@ -25,4 +25,12 @@ export class LoginComponent {
       alert('Invalid username or password');
     }
   }
+
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  navigateToForgotPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
 }

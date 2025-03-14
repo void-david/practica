@@ -37,3 +37,25 @@ h1 {
   button:hover {
     background-color: #45a049;
   }
+
+  .center-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  
+  .center-buttons button {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .center-buttons button:hover {
+    background-color: #45a049;
+
+  }
